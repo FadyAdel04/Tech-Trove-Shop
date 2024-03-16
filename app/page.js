@@ -4,6 +4,8 @@ import Footer from "./components/Footer";
 import Card from './components/Card';
 import Banner from './components/Banner';
 import { getProducts } from '@/sanity/product-util';
+import Link from 'next/link';
+import RelationProduct from './components/RelationProduct';
 
 export default async function Home() {
 
@@ -36,6 +38,8 @@ export default async function Home() {
       }
       </div>
       </div>
+
+      
 
       <Footer/>
 

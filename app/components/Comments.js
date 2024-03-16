@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { FaStar } from 'react-icons/fa';
 import { createComment, getCommentsByProductId } from '@/sanity/comment-util';
 import { useUser } from "@clerk/nextjs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Comments({ product }) {
   const [rating, setRating] = useState(0);
@@ -34,7 +36,7 @@ function Comments({ product }) {
     if (comment.trim() !== '') {
       // Call createComment function to create a new comment
       const newComment = await createComment(product?._id, comment, rating, email);
-      alert('Comment added');
+      toast.success('Comment Posted');
 
       // Update the state with the new comment received from Sanity
       setComments([...comments, newComment]);
@@ -78,7 +80,18 @@ function Comments({ product }) {
           Comment
         </button>
       </div>
-
+      <ToastContainer 
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
       
 
       {/* Dynamic Comments */}

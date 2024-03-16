@@ -8,6 +8,8 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {createOrder} from '@/sanity/order-util'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cart() {
 
@@ -29,6 +31,7 @@ function Cart() {
       const cardElement = elements?.getElement("card");
       e.preventDefault();
       setLoading(true);
+      toast.success('Payed Success');
       
       try {
         if (!stripe || !cardElement){
@@ -69,6 +72,7 @@ function Cart() {
                     <tr className="text-[#5B20B6] border-b border-gray-200">
                         <th className="py-2 px-4">Product</th>
                         <th className="py-2 px-4">Quantity</th>
+                        <th className="py-2 px-4">Color</th>
                         <th className="py-2 px-4">Price</th>
                         <th className="py-2 px-4">Remove</th>
                     </tr>
@@ -81,6 +85,7 @@ function Cart() {
                                 {product.name}
                             </td>
                             <td className="py-2 px-4">{product.quantity}</td>
+                            <td className="py-2 px-4">{product.color}</td>
                             <td className="py-2 px-4">${(product.price * product.quantity).toFixed(2)}</td>
                             <td className="py-2 px-4">
                             <FaTrash onClick={()=>{handleRemoveFromCart(product?._id)}} className="text-[#5B20B6] mx-auto cursor-pointer" />
@@ -102,8 +107,20 @@ function Cart() {
                 </div>
                 </>)
               }
-
+              
             <div className="mt-6 text-[#5B20B6] max-w-sm mx-auto space-y-4">
+            <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
             {
                 cartTotal > 0 && (<>
                   <button onClick={onSubmit} className="text-lg w-full font-semibold text-center mr-4 bg-[#5B20B6]  text-white py-2 px-4 rounded hover:text-[#5B20B6] hover:bg-white border border-[#5B20B6]">

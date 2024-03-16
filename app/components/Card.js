@@ -22,6 +22,7 @@ function Card({ product }) {
             <br />
         </div>
 
+
         {/* Sticky Price Tag - Outside the Card Container */}
         <div className="absolute bottom-0 right-0 p-2 bg-[#F5F3FF] shadow-md">
             <span className="text-[#5B20B6] text-lg font-semibold">${product.price}</span>

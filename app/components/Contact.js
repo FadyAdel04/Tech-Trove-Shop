@@ -1,6 +1,8 @@
 'use client'
 import React, { useState } from 'react';
 import { createContact } from '@/sanity/contact-util';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Contact() {
@@ -23,7 +25,7 @@ function Contact() {
       setName('');
       setEmail('');
       setIssue('');
-      alert('Issue sent');
+      toast.success('Issue sent');
     } catch (error) {
       console.error('Error submitting form:', error.message);
         alert('Error submitting form');
@@ -82,7 +84,18 @@ function Contact() {
             required
           />
         </div>
-
+        <ToastContainer 
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      />
         {/* Submit Button with Loading State */}
         <button
           type="submit"

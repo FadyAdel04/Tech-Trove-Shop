@@ -2,7 +2,9 @@
 import Image from 'next/image';
 import React,{useState} from 'react';
 import useCartStore from "../../cartStore"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 function Details({product}) {
   const [selectedImage, setSelectedImage] = useState(product?.image);
@@ -14,8 +16,10 @@ function Details({product}) {
 
   const handleAddToCart = () => {
     addToCart({ product, quantity: qty,color:selectedColor });
-    alert('Added to cart');
+    toast.success(`${product.name} ' is Added to cart'`);
   };
+
+
 
   return (
     <div className='max-w-7xl mx-auto mt-20'>
@@ -72,11 +76,27 @@ function Details({product}) {
             />
           </div>
 
-          
+          <ToastContainer 
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
           <div className="mt-6">
             <button onClick={handleAddToCart} className="bg-[#5B20B6] text-white px-6 py-3 rounded-md">
               Add to Cart
             </button>
+            <Link href='/products'>
+              <button className="bg-[#5B20B6] text-white mx-4 px-6 py-3 rounded-md">
+                Back to Products
+              </button>
+            </Link>
           </div>
 
         </div>
@@ -107,6 +127,7 @@ function Details({product}) {
           }
         </ul>
       </div>
+
     </div>
   );
 }
